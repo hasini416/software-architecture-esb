@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api name="ResearchGroup-Vision" context="research-groups/v1/vision/" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET" uri-template="/">
+        <inSequence>
+        </inSequence>
+        <faultSequence>
+        </faultSequence>
+    </resource>
+    <resource methods="GET" uri-template="/publications">
+        <inSequence>
+            <call description="filter the publications from the given endpoint ">
+                <endpoint key="publications-filter-by-research-group"/>
+            </call>
+            <datamapper config="resources:datamapper/rg-vision-publications-mapper/rg-vision-publications-mapper.dmc" inputSchema="resources:datamapper/rg-vision-publications-mapper/rg-vision-publications-mapper_inputSchema.json" outputSchema="resources:datamapper/rg-vision-publications-mapper/rg-vision-publications-mapper_outputSchema.json"/>
+            <log category="INFO" logMessageID="false" logFullPayload="false">
+                <message></message>
+            </log>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+        </faultSequence>
+    </resource>
+</api>
